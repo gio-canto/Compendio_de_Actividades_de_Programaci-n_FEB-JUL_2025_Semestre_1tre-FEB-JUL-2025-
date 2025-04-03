@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     // Definición de variables
-    string nom_p; // Nombre del producto
+    char nom_p [99]; // Nombre del producto
     float kilos, precioPorKilo, precioDescuento, precioFinal, costoManual;
     int SKU;
 
@@ -62,15 +62,19 @@ int main() {
         }
     } else {
         cout << "Modo manual activado." << endl;
-        cout << "Indique el nombre del producto: ";
-        cin, nom_p;
-        cout << "Indique el costo del producto: ";
+        cout << "Indique el nombre del producto: " << endl;
+        cin.ignore(); // Elimina el salto de línea pendiente en el buffer
+        cin.getline(nom_p, 99); // Permite nombres con espacios
+    
+        cout << "Indique el costo del producto: " << endl;
         cin >> costoManual;
+    
         cout << "==========================================" << endl;
         cout << "Producto: " << nom_p << endl;
         cout << "Total a pagar: $" << fixed << setprecision(2) << costoManual << endl;
         cout << "==========================================" << endl;
-    }
+    }    
+    
     cout << "Gracias por su compra :D" << endl;
     system("pause");
 
