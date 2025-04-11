@@ -22,6 +22,7 @@ Este documento sirve como referencia rápida para estudiantes que están comenza
 | `abs(x)` | Devuelve el valor absoluto de un número |
 | `pow(a, b)` | Eleva a una potencia: `a^b` |
 | `M_PI` | Valor de π, disponible desde `<cmath>` |
+| `sqrt(x)` | Devuelve la raíz cuadrada de `x` (requiere `<cmath>`) |
 
 ---
 
@@ -176,6 +177,10 @@ Es la **base lógica** de todo programa: primero se capturan los datos, luego se
 | `undefined reference to 'main'` | No hay una función `main()` | Revisa que tengas `int main()` correctamente escrito |
 | `too many arguments to function` | Pasaste más datos de los que recibe una función | Asegúrate que coincidan los parámetros |
 | `ambiguous overload for operator<<` | Intentas imprimir un tipo no compatible | Usa cast o convierte el tipo apropiadamente |
+| `'VARIABLE' was not declared in this scope` | Variable no declarada o fuera de alcance | Declara la variable antes de usarla |
+| `expected identifier before '(' token` | Condición `if` mal estructurada | Encierra toda la condición entre paréntesis `()` |
+| `expected ';' before 'cout'` | Olvidaste cerrar la línea anterior con `;` | Asegúrate de terminar cada línea con punto y coma |
+| `expected identifier before '(' token` | Usaste `if` con paréntesis mal colocados | Toda la condición debe ir dentro del `if`, ej. `if ((a + b > c) && ...)` |
 
 🛠 Si recibes errores raros, **lee el mensaje completo**, y ve línea por línea.
 
@@ -255,13 +260,17 @@ cin.getline(nom_p, 99);  // Captura toda la línea con espacios
 
 ## 🗂 Otros errores frecuentes
 
-| Error | Causa | Solución |
-|-------|-------|----------|
-| `expected ';' before` | Falta punto y coma | Revisa cada línea |
-| `was not declared in this scope` | Variable no declarada o fuera de alcance | Asegúrate de declarar antes de usar |
-| `invalid operands to binary expression` | Tipos incompatibles en operaciones (ej. `string + int`) | Asegúrate de usar tipos correctos |
-| Salto de entrada con `getline()` | `cin >>` previo dejó `\n` en buffer | Usa `cin.ignore();` antes |
-| No imprime correctamente | Error de sintaxis en `cout` o uso incorrecto de variables | Revisa las comillas, variables y operadores |
+| `expected ';' before` | Falta un punto y coma al final de una declaración de variable o instrucción | Asegúrate de cerrar cada línea con `;` |
+| `'x' was not declared in this scope` | Usaste una variable antes de declararla | Declárala al inicio del bloque `main()` o donde la necesites |
+| `expected identifier before '(' token` | Error de paréntesis en estructuras como `if` | Encierra toda la condición entre un solo paréntesis `if ((cond1) && (cond2))` |
+| `expected initializer before 'cout'` | Hay un error anterior que impide interpretar correctamente el `cout` | Verifica que todas las líneas anteriores estén bien cerradas |
+
+| `expected ';' before` | Falta punto y coma al final de una declaración de variable | Agrega `;` al final de la línea |
+| `was not declared in this scope` | Se usó una variable no declarada | Asegúrate de declarar todas las variables antes de usarlas |
+| `expected identifier before '(' token` | Error en el uso de `if` sin encerrar toda la condición entre paréntesis | Usa paréntesis para encerrar toda la condición del `if` |
+
+
+
 
 ---
 
