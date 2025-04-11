@@ -62,6 +62,48 @@ Este documento sirve como referencia rápida para estudiantes que están comenza
 | Suma de N enteros | N * (N + 1) / 2 | Series numéricas |
 
 ---
+## 🔡 Manipulación de Caracteres (Mayúsculas, Minúsculas y Más)
+
+Estas funciones permiten trabajar con letras individuales, muy útiles al validar entradas, comparar caracteres o normalizar datos.
+
+| Función | Uso / Descripción |
+|--------|--------------------|
+| `tolower(c)` | Convierte un carácter `c` a minúscula (`'A'` → `'a'`) |
+| `toupper(c)` | Convierte un carácter `c` a mayúscula (`'a'` → `'A'`) |
+| `isupper(c)` | Devuelve `true` si `c` es mayúscula |
+| `islower(c)` | Devuelve `true` si `c` es minúscula |
+| `isalpha(c)` | Devuelve `true` si `c` es una letra (a-z o A-Z) |
+| `isdigit(c)` | Devuelve `true` si `c` es un número (0-9) |
+
+📌 Todas estas funciones requieren la librería `<cctype>`.
+
+### ✍️ Ejemplo de uso:
+
+```cpp
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+int main() {
+    char letra;
+
+    cout << "Ingresa una letra: ";
+    cin >> letra;
+
+    if (isalpha(letra)) {
+        cout << "Versión en mayúscula: " << char(toupper(letra)) << endl;
+        cout << "Versión en minúscula: " << char(tolower(letra)) << endl;
+    } else {
+        cout << "No ingresaste una letra." << endl;
+    }
+
+    return 0;
+}
+```
+
+🔍 Esto sirve para normalizar texto, validar formularios, o hacer que dos entradas "iguales pero distintas" (como `'a'` y `'A'`) puedan compararse correctamente.
+
+---
 
 ## 🧱 Modelo Base de Código en C++
 
