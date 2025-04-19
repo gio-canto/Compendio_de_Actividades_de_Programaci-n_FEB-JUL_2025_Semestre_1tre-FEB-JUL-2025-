@@ -1,0 +1,49 @@
+# Archivos de compilación de C++
+*.out
+*.o
+*.obj
+*.exe
+*.gch
+*.pch
+
+# Archivos generados por editores de texto
+*.log
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.vcxproj.*
+*.ncb
+*.psess
+*.vsp
+*.tlog
+*.pdb
+*.idb
+
+# Archivos de Code::Blocks
+*.layout
+*.depend
+*.layout.save
+*.cbTemp
+
+# Archivos de Visual Studio
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.ipch
+*.dbmdl
+
+# Carpetas generadas por compilación
+bin/
+obj/
+Debug/
+Release/
+x64/
+ipch/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
