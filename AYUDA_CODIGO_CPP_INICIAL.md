@@ -181,6 +181,7 @@ Es la **base lógica** de todo programa: primero se capturan los datos, luego se
 | `expected identifier before '(' token` | Condición `if` mal estructurada | Encierra toda la condición entre paréntesis `()` |
 | `expected ';' before 'cout'` | Olvidaste cerrar la línea anterior con `;` | Asegúrate de terminar cada línea con punto y coma |
 | `expected identifier before '(' token` | Usaste `if` con paréntesis mal colocados | Toda la condición debe ir dentro del `if`, ej. `if ((a + b > c) && ...)` |
+| `getline` falla tras múltiples iteraciones | Se usa en un ciclo después de `cin >>` y no se limpia bien el buffer        | Coloca `cin.ignore(numeric_limits<streamsize>::max(), '\n');` al final del ciclo     |
 
 🛠 Si recibes errores raros, **lee el mensaje completo**, y ve línea por línea.
 
