@@ -139,7 +139,50 @@ int main() {
     return 0;
 }
 ```
+## 🔄 Conversión de Tipos: `static_cast<T>()`
 
+La función `static_cast<tipo>()` permite convertir un valor de un tipo de dato a otro de forma segura y explícita.
+
+### 🧠 ¿Por qué usar `static_cast<float>`?
+
+En C++, si haces una división entre dos enteros, **el resultado será un entero**, incluso si lo guardas en una variable `float`. Por ejemplo:
+
+```cpp
+int a = 20, b = 178;
+float porcentaje = (a / b) * 100;  // ❌ Da 0.0 en lugar de 11.24
+```
+
+Esto se debe a que `a / b` se evalúa como una división entera, que da 0.
+
+✅ Para forzar una división en punto flotante, puedes hacer:
+
+```cpp
+float porcentaje = (static_cast<float>(a) / b) * 100;  // ✔ Da 11.24
+```
+
+### 🆚 Comparación con PSeInt
+En PSeInt puedes escribir:
+```pseudocode
+porcentaje = (20 / 178) * 100
+```
+Y el resultado será decimal, porque el pseudolenguaje **no distingue entre enteros y reales** al dividir. En cambio, C++ **sí lo hace**, y eso puede generar errores si no se castea el dato.
+
+### 🧪 Ejemplo dentro de un programa:
+```cpp
+// Justificación del uso de static_cast<float>:
+// En este punto se calcula el porcentaje de empleados mayores de 60 años respecto al total de trabajadores.
+// En C++, la división entre enteros da un resultado entero, por eso usamos static_cast para obtener decimales.
+porcentaje_jubilacion = (static_cast<float>(vc_tb_jub) / 178.0f) * 100;
+```
+
+### 📌 Recomendación
+Usar `static_cast<float>()` **hace tu intención clara**, **evita errores silenciosos**, y mejora la legibilidad del código.
+
+---
+
+## 🧠 Consejo Final
+
+> No te memorices el código: **entiéndelo paso a paso**. Es como aprender a cocinar: primero lees, luego practicas, y al final, improvisas.
 ---
 
 ## ❓ Preguntas Frecuentes (FAQ)
