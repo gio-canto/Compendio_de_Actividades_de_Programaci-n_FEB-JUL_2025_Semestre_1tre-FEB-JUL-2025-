@@ -2,6 +2,8 @@
 
 Este documento sirve como referencia rápida para estudiantes que están comenzando con la programación en C++, basada en las actividades vistas hasta ahora. Aquí encontrarás comandos útiles, buenas prácticas de estilo, fórmulas matemáticas aplicadas, estructuras comunes, un modelo de inicio y un FAQ con dudas frecuentes.
 
+> No te memorices el código: **entiéndelo paso a paso**. Es como aprender a cocinar: primero lees, luego practicas, y al final, improvisas.
+
 ---
 
 ## 🧾 Glosario de Comandos y Funciones Básicas
@@ -206,27 +208,7 @@ No, pero es importante **entender su estructura** y saber cómo aplicarlas al tr
 Es la **base lógica** de todo programa: primero se capturan los datos, luego se procesan y finalmente se muestran los resultados.
 
 
-### ⚠️ ERRORES COMUNES ESPECÍFICOS
 
-| Error o mensaje | Causa común | Solución recomendada |
-|-----------------|-------------|-----------------------|
-| `expected ';' before` | Olvidaste un punto y coma al final de una instrucción | Verifica cada línea |
-| `was not declared in this scope` | Usaste una variable no declarada | Declárala antes de usarla |
-| `no match for operator <<` | Intentas mostrar algo incompatible con `cout` (ej. `cout << nombre[10];` sin contexto) | Asegúrate que la variable esté correctamente definida |
-| `invalid operands to binary expression` | Tipos incompatibles en operaciones, como `string + int` | Convierte variables si es necesario |
-| `getline()` se salta la entrada | `cin >>` anterior dejó un `\n` pendiente | Usa `cin.ignore();` antes |
-| No imprime el resultado | `cout` mal escrito o variable vacía | Revisa que la variable tenga un valor asignado y `cout` esté bien escrito |
-| Ciclo infinito con `while` | La condición nunca cambia o nunca se vuelve falsa | Asegúrate de actualizar la variable dentro del ciclo |
-| `undefined reference to 'main'` | No hay una función `main()` | Revisa que tengas `int main()` correctamente escrito |
-| `too many arguments to function` | Pasaste más datos de los que recibe una función | Asegúrate que coincidan los parámetros |
-| `ambiguous overload for operator<<` | Intentas imprimir un tipo no compatible | Usa cast o convierte el tipo apropiadamente |
-| `'VARIABLE' was not declared in this scope` | Variable no declarada o fuera de alcance | Declara la variable antes de usarla |
-| `expected identifier before '(' token` | Condición `if` mal estructurada | Encierra toda la condición entre paréntesis `()` |
-| `expected ';' before 'cout'` | Olvidaste cerrar la línea anterior con `;` | Asegúrate de terminar cada línea con punto y coma |
-| `expected identifier before '(' token` | Usaste `if` con paréntesis mal colocados | Toda la condición debe ir dentro del `if`, ej. `if ((a + b > c) && ...)` |
-| `getline` falla tras múltiples iteraciones | Se usa en un ciclo después de `cin >>` y no se limpia bien el buffer        | Coloca `cin.ignore(numeric_limits<streamsize>::max(), '\n');` al final del ciclo     |
-
-🛠 Si recibes errores raros, **lee el mensaje completo**, y ve línea por línea.
 
 ---
 
@@ -239,81 +221,6 @@ Es la **base lógica** de todo programa: primero se capturan los datos, luego se
 📁 Si deseas ver ejemplos prácticos, revisa las carpetas `act-1-descuento-botas` a `act-18-suma-promedio-tres-numeros`.
 
 ¡Sigue practicando y no tengas miedo de equivocarte!
-
-
----
-
-## ⚠️ Errores Comunes y Cómo Solucionarlos
-
-### ❌ 1. Uso incorrecto de `cin, nom_p;`
-
-**Código incorrecto:**
-```cpp
-cin, nom_p;
-```
-
-**¿Qué hace realmente?**
-- Esta línea **no hace ninguna entrada**.
-- Solo evalúa dos expresiones separadas por coma. No se lee ningún dato.
-- Es equivalente a escribir solo: `nom_p;` → no hace nada útil.
-
-**Consecuencia:**
-- El programa no pide el nombre del producto como se esperaba.
-- Se salta también la entrada siguiente (como el costo), porque el flujo no se detiene.
-
----
-
-### ❌ 2. Usar `getline()` después de `cin >>` sin limpiar el buffer
-
-**Contexto:**
-```cpp
-int SKU;
-cin >> SKU;
-getline(cin, nom_p); // Se salta esta entrada
-```
-
-**¿Por qué se salta?**
-- Después de `cin >> SKU;`, queda un **salto de línea (`\n`) pendiente** en el buffer de entrada.
-- `getline()` lo captura de inmediato pensando que el usuario ya presionó Enter.
-
----
-
-### ✅ Solución correcta:
-
-```cpp
-cin >> SKU;
-cin.ignore();            // Limpia el salto de línea pendiente
-cin.getline(nom_p, 99);  // Captura toda la línea con espacios
-```
-
-**¿Por qué `cin.ignore();`?**
-- Elimina el `\n` restante en el buffer.
-
-**¿Por qué `getline()`?**
-- Permite capturar nombres con espacios como "Mango ataulfo", a diferencia de `cin >>` que solo toma una palabra.
-
----
-
-### ✅ Resultado esperado
-
-- El nombre del producto se captura correctamente.
-- El costo también se recibe sin que el programa lo salte.
-- El flujo del programa continúa limpio y sin errores.
-
----
-
-## 🗂 Otros errores frecuentes
-
-| `expected ';' before` | Falta un punto y coma al final de una declaración de variable o instrucción | Asegúrate de cerrar cada línea con `;` |
-| `'x' was not declared in this scope` | Usaste una variable antes de declararla | Declárala al inicio del bloque `main()` o donde la necesites |
-| `expected identifier before '(' token` | Error de paréntesis en estructuras como `if` | Encierra toda la condición entre un solo paréntesis `if ((cond1) && (cond2))` |
-| `expected initializer before 'cout'` | Hay un error anterior que impide interpretar correctamente el `cout` | Verifica que todas las líneas anteriores estén bien cerradas |
-
-| `expected ';' before` | Falta punto y coma al final de una declaración de variable | Agrega `;` al final de la línea |
-| `was not declared in this scope` | Se usó una variable no declarada | Asegúrate de declarar todas las variables antes de usarlas |
-| `expected identifier before '(' token` | Error en el uso de `if` sin encerrar toda la condición entre paréntesis | Usa paréntesis para encerrar toda la condición del `if` |
-
-
 
 
 ---
@@ -426,4 +333,455 @@ switch (variable) {
 
 📌 Te recomendamos practicar con ellas para dominarlas y poder resolver problemas reales fácilmente.
 
+
 ¡Sigue practicando y no tengas miedo de equivocarte!
+
+
+## 📝 Manejo de Espacios en Blanco y Tipos de Datos
+
+### 📥 Captura de Datos con `cin >> ws`
+
+`cin >> ws` es una forma de ignorar espacios en blanco antes de capturar texto. Esto es útil al capturar cadenas de texto que podrían estar precedidas por espacios no deseados.
+
+#### ✅ Ejemplo:
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string nombre;
+    cout << "Ingresa tu nombre: ";
+    cin >> ws; // Ignora espacios en blanco previos
+    getline(cin, nombre);
+    cout << "Hola, " << nombre << "!" << endl;
+    return 0;
+}
+```
+
+### 🚀 Tipos de Datos y Espacios en Blanco
+
+| Tipo de Dato | Impacto del Espacio | Ejemplo |
+|--------------|----------------------|---------|
+| `int`, `float`, `double` | Ignora espacios antes del valor | `cin >> ws >> x;` |
+| `char` | Captura el primer carácter, incluso si es un espacio | `cin >> ws >> letra;` |
+| `string` | Captura todo, incluyendo espacios si se usa `getline()` | `getline(cin, texto);` |
+
+### 📤 Control de Salida con `cout`
+
+`cout` permite personalizar la salida de datos con precisión, utilizando manipuladores.
+
+#### ✅ Ejemplos:
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double valor = 3.1415926535;
+    cout << fixed << setprecision(4);  // Limita a 4 decimales
+    cout << "Valor con 4 decimales: " << valor << endl;
+
+    cout << setw(10) << "Alineado" << endl; // Alinea texto a la derecha
+    return 0;
+}
+```
+### 📌 Uso avanzado de `cin >> ws` con Líneas Completas
+
+Cuando deseas capturar una línea completa de texto pero evitando espacios en blanco iniciales, la combinación de `cin >> ws` y `getline()` es muy útil.
+
+#### ✅ Ejemplo:
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string linea;
+
+    cout << "Ingresa una línea completa: ";
+    cin >> ws;               // Ignora espacios en blanco iniciales
+    getline(cin, linea);     // Captura toda la línea
+
+    cout << "La línea ingresada fue: " << linea << endl;
+    return 0;
+}
+```
+
+#### 🔎 ¿Qué ocurre aquí?
+- `cin >> ws` ignora cualquier espacio en blanco inicial que el usuario pueda ingresar.
+- `getline(cin, linea)` captura el resto del texto, incluyendo espacios internos y finales.
+
+#### 🚀 Cuándo usarlo:
+- Cuando necesitas capturar frases completas o líneas de texto sin preocuparte por espacios iniciales.
+- En programas de entrada de texto como nombres, descripciones o comandos.
+---
+### 🎯 Uso Correcto de `setprecision(n)`
+
+La función `setprecision(n)` permite controlar el número de cifras decimales que se muestran en la salida de números reales (flotantes).
+
+#### ✅ ¿Qué es y cómo funciona?
+- `setprecision(n)` controla el **número total de dígitos** (enteros y decimales) cuando no se usa `fixed`.
+- Al combinarse con `fixed`, controla únicamente los **decimales** que se muestran.
+
+#### ✅ Ejemplos prácticos:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double pi = 3.1415926535;
+
+    // Sin fixed: setprecision controla el total de dígitos
+    cout << "Sin fixed: " << setprecision(4) << pi << endl;
+
+    // Con fixed: setprecision controla solo los decimales
+    cout << fixed << setprecision(2);
+    cout << "Con fixed: " << pi << endl;
+
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Sin fixed: 3.142
+Con fixed: 3.14
+```
+
+#### 🚀 ¿Cuándo usar `setprecision(n)`?
+- Cuando necesitas presentar resultados numéricos con una precisión específica, como en cálculos financieros, científicos o de ingeniería.
+- Al mostrar valores monetarios o físicos (metros, kilómetros, etc.).
+
+---
+
+### 📘 Lección: Controlando la Precisión de Decimales
+
+Imagina que estás programando una calculadora que debe mostrar resultados financieros, y es crucial que todos los valores se muestren siempre con **2 decimales**, como en una factura.
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double subtotal = 123.4567;
+    double iva = subtotal * 0.16;
+    double total = subtotal + iva;
+
+    cout << fixed << setprecision(2);
+    cout << "Subtotal: $" << subtotal << endl;
+    cout << "IVA (16%): $" << iva << endl;
+    cout << "Total: $" << total << endl;
+
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Subtotal: $123.46
+IVA (16%): $19.75
+Total: $143.21
+```
+
+#### 🚀 ¿Qué aprendiste?
+- `setprecision(n)` es una forma poderosa de controlar la presentación numérica.
+- Al usarlo con `fixed`, puedes garantizar un formato consistente de decimales.
+- Es esencial para programas que manejan dinero, cálculos precisos o reportes.
+## 🧠 Consejo Final
+
+> No te memorices el código: **entiéndelo paso a paso**. Es como aprender a cocinar: primero lees, luego practicas, y al final, improvisas.
+
+### 📏 Uso Correcto de `setw(n)`
+
+La función `setw(n)` permite controlar el ancho de campo que se utilizará para mostrar un valor en la salida. Esto es útil para **alinear textos y números en columnas**, haciendo que las salidas sean más organizadas.
+
+#### ✅ ¿Qué es y cómo funciona?
+- `setw(n)` establece el **ancho mínimo** del campo de salida.
+- Si el contenido es más pequeño que el ancho especificado, se añaden **espacios a la izquierda** (alineación a la derecha).
+- Si el contenido es más grande que el ancho, se muestra completo sin recortarse.
+
+#### ✅ Ejemplo práctico basado en la línea de la ACT 24:
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    string nom_emp = "Juan Pérez";
+    int eda = 35;
+    double bonis = 15.5;
+
+    cout << setw(5) << "El empleado " << nom_emp 
+         << " con una edad de " << eda 
+         << " años, obtendrá una bonificación de " << bonis << "%." << endl;
+
+    return 0;
+}
+```
+
+#### 🔎 ¿Qué ocurre aquí?
+- `setw(5)` aplica solo al siguiente elemento (el texto `"El empleado "`), alineándolo a la derecha con un ancho mínimo de 5 caracteres.
+- Como el texto `"El empleado "` es más largo que 5, se muestra completo sin afectar la alineación.
+
+#### ✅ Salida esperada:
+```
+El empleado Juan Pérez con una edad de 35 años, obtendrá una bonificación de 15.5%.
+```
+
+#### 🚀 ¿Cuándo usar `setw(n)`?
+- Para alinear columnas de texto o números en reportes, tablas, recibos y menús.
+- En programas que requieren una salida visualmente organizada.
+
+---
+
+### 📘 Lección: Alineando Columnas con `setw()`
+
+Imagina que estás programando una lista de empleados con su nombre, edad y bonificación. Sin `setw()`, la salida se vería desorganizada.
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    cout << setw(15) << "Nombre" 
+         << setw(10) << "Edad" 
+         << setw(15) << "Bonificación" << endl;
+    cout << setw(15) << "Juan Pérez" 
+         << setw(10) << 35 
+         << setw(15) << "15.5%" << endl;
+    cout << setw(15) << "Ana Gómez" 
+         << setw(10) << 28 
+         << setw(15) << "10%" << endl;
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+         Nombre       Edad    Bonificación
+     Juan Pérez        35           15.5%
+      Ana Gómez        28             10%
+```
+
+#### 🚀 ¿Qué aprendiste?
+- `setw(n)` es ideal para alinear columnas y organizar salidas.
+- Se aplica solo al siguiente valor que se muestra con `cout`.
+- Es útil para reportes, tablas y cualquier salida que deba ser clara y profesional.
+---
+### 🚀 ¿Qué es `static_cast` en C++?
+
+`static_cast` es una forma segura y controlada de realizar conversiones de tipos en C++, garantizando que el tipo de datos convertido sea compatible y minimizando errores.
+
+#### ✅ ¿Qué es y cómo funciona?
+- `static_cast<Tipo>(valor)` convierte un valor a un tipo específico de manera explícita.
+- Es más seguro que las conversiones implícitas y evita errores comunes de tipo.
+- Solo permite conversiones entre tipos compatibles, como:
+  - De entero a flotante (`int` a `float`).
+  - De flotante a entero (`double` a `int`).
+  - De punteros relacionados (herencia).
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int entero = 10;
+    double decimal = 3.14;
+
+    // Conversión de entero a flotante
+    double convertido = static_cast<double>(entero);
+    cout << "Convertido a double: " << convertido << endl;
+
+    // Conversión de flotante a entero (pierde decimales)
+    int truncado = static_cast<int>(decimal);
+    cout << "Convertido a int: " << truncado << endl;
+
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Convertido a double: 10.0
+Convertido a int: 3
+```
+
+---
+
+### 📘 Lección: ¿Por qué usar `static_cast`?
+
+Imagina que estás desarrollando una calculadora y deseas que siempre muestre resultados decimales, incluso si los valores son enteros.
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 5;
+    int b = 2;
+
+    // División entera (trunca decimales)
+    cout << "Division sin static_cast: " << a / b << endl;
+
+    // División con static_cast (resultado decimal)
+    cout << "Division con static_cast: " << static_cast<double>(a) / b << endl;
+
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Division sin static_cast: 2
+Division con static_cast: 2.5
+```
+
+#### 🚀 ¿Qué aprendiste?
+- `static_cast` es la forma recomendada para convertir tipos en C++ de manera segura.
+- Evita errores de tipo y garantiza que las conversiones sean explícitas y comprensibles.
+- Es ideal para cálculos que requieren precisión, como divisiones o conversiones específicas.
+
+### 🚀 ¿Qué es `break` en Ciclos?
+
+`break` es una instrucción que permite **salir inmediatamente de un ciclo** (`for`, `while` o `do-while`), incluso si la condición del ciclo no se ha cumplido.
+
+#### ✅ ¿Qué es y cómo funciona?
+- Interrumpe la ejecución del ciclo en el que se encuentra.
+- No importa si la condición del ciclo sigue siendo verdadera, al encontrar un `break`, el ciclo se termina.
+- Es útil para salir de un ciclo basado en una condición especial o al encontrar un valor específico.
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    for (int i = 1; i <= 10; i++) {
+        if (i == 5) {
+            cout << "Se encontró el valor 5, terminando el ciclo." << endl;
+            break; // Sale del ciclo inmediatamente
+        }
+        cout << "Valor: " << i << endl;
+    }
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Valor: 1
+Valor: 2
+Valor: 3
+Valor: 4
+Se encontró el valor 5, terminando el ciclo.
+```
+
+---
+
+### 📘 Lección: ¿Cuándo usar `break` en un ciclo?
+
+Imagina que estás desarrollando un programa para buscar el primer número negativo en una lista de números. En lugar de seguir buscando después de encontrarlo, puedes usar `break` para detener el ciclo.
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int numeros[] = {3, 7, 1, -5, 4, 8};
+    int tam = 6;
+
+    for (int i = 0; i < tam; i++) {
+        if (numeros[i] < 0) {
+            cout << "Primer número negativo encontrado: " << numeros[i] << endl;
+            break; // Detiene el ciclo al encontrar el primer negativo
+        }
+    }
+
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Primer número negativo encontrado: -5
+```
+🔵 break es una instrucción que interrumpe inmediatamente el ciclo (ya sea for, while o do...while) en el que está y sale de él.
+
+En este caso, si el usuario responde con 'N' o 'n' en la primera pregunta, el programa:
+
+No entra a capturar datos.
+
+Rompe el ciclo de inmediato.
+
+Sigue con las instrucciones que estén después del do...while, es decir, mostrar los resultados.
+
+#### 🚀 ¿Qué aprendiste?
+- `break` permite controlar ciclos y salir de ellos de forma anticipada.
+- Es ideal para buscar valores específicos o salir de procesos repetitivos.
+- Debes usarlo con cuidado para no crear errores lógicos.
+
+## 🔤 Manipulación de Cadenas de Caracteres (Strings)
+
+Las cadenas de caracteres (strings) en C++ se manipulan fácilmente gracias a las funciones de la clase `string`. Estas funciones permiten obtener información, modificar, comparar y transformar cadenas.
+
+#### ✅ Funciones Básicas de Manipulación de Strings
+| Función | Descripción | Ejemplo |
+|----------|--------------|---------|
+| `length()` | Devuelve la longitud de la cadena | `str.length()` |
+| `empty()` | Verifica si la cadena está vacía | `str.empty()` |
+| `clear()` | Borra todo el contenido de la cadena | `str.clear()` |
+| `at(n)` | Devuelve el carácter en la posición `n` | `str.at(2)` |
+| `substr(pos, len)` | Extrae una subcadena desde `pos` y de longitud `len` | `str.substr(0, 4)` |
+| `append()` | Agrega texto al final de la cadena | `str.append(" texto")` |
+| `insert(pos, texto)` | Inserta texto en una posición específica | `str.insert(3, "ABC")` |
+| `erase(pos, len)` | Elimina parte de la cadena | `str.erase(2, 4)` |
+| `replace(pos, len, texto)` | Reemplaza parte de la cadena | `str.replace(0, 4, "Nuevo")` |
+| `find(texto)` | Busca texto y devuelve su posición | `str.find("Hola")` |
+| `rfind(texto)` | Busca texto desde el final | `str.rfind("Hola")` |
+| `compare(str2)` | Compara dos cadenas (devuelve 0 si son iguales) | `str.compare("Otro")` |
+
+---
+
+### 📘 Lección: Manipulando Cadenas de Texto
+
+Imagina que estás desarrollando un programa que debe manejar nombres completos, y deseas extraer solo el nombre de pila.
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string nombre_completo = "Juan Pérez López";
+    string nombre;
+
+    // Extraer el primer nombre (hasta el primer espacio)
+    nombre = nombre_completo.substr(0, nombre_completo.find(" "));
+
+    cout << "Nombre de pila: " << nombre << endl;
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Nombre de pila: Juan
+```
+
+#### 🚀 ¿Qué aprendiste?
+- Puedes utilizar `substr()` y `find()` para extraer partes específicas de una cadena.
+- Las funciones de string permiten manipular fácilmente el texto, ideal para nombres, descripciones o formatos de texto.
+
+
+
