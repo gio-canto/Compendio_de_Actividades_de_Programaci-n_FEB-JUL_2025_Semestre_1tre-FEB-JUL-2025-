@@ -783,5 +783,39 @@ Nombre de pila: Juan
 - Puedes utilizar `substr()` y `find()` para extraer partes específicas de una cadena.
 - Las funciones de string permiten manipular fácilmente el texto, ideal para nombres, descripciones o formatos de texto.
 
+## 📘 Lección: ¿Cuándo usar el Operador Ternario?
 
+Imagina que estás desarrollando un programa para calcular el promedio de edad de un grupo de personas. Sin el operador ternario, necesitarías un `if-else` más largo.
+
+#### ✅ Ejemplo práctico:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int total_personas = 0;
+    double suma_edades = 0.0;
+    double promedio;
+
+    // Simulando datos
+    total_personas = 3;
+    suma_edades = 75.0;
+
+    // Uso del operador ternario para el promedio
+    promedio = (total_personas > 0) ? (suma_edades / total_personas) : 0;
+
+    cout << "Promedio de edad: " << promedio << endl;
+    return 0;
+}
+```
+
+#### 🔎 Salida esperada:
+```
+Promedio de edad: 25
+```
+
+#### 🚀 ¿Qué aprendiste?
+- El operador ternario (`? :`) simplifica condiciones cortas en una sola línea.
+- Es útil para cálculos que dependen de una condición, como promedios que deben evitar divisiones por cero.
+- Puedes usarlo en asignaciones, salidas y cualquier lugar donde se necesite una evaluación rápida.
 
