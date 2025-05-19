@@ -114,7 +114,7 @@ Los operadores lógicos permiten construir condiciones más complejas combinando
 | Operador | Nombre | Descripción | Ejemplo |
 |----------|--------|-------------|---------|
 | `&&` | AND (Y lógico) | Devuelve `true` solo si **ambas** condiciones son verdaderas | `(a > 0 && b < 10)` |
-| `||` | OR (O lógico) | Devuelve `true` si **al menos una** condición es verdadera | `(edad >= 18 || tienePermiso)` |
+| "(||)" | OR (O lógico) | Devuelve `true` si **al menos una** condición es verdadera | `(edad >= 18 || tienePermiso)` |
 | `!` | NOT (Negación) | Invierte el valor lógico de una condición | `!(x == 5)` es `true` si `x` **no** es 5 |
 
 🔎 Úsalos en estructuras como `if`, `while` y `for` para tomar decisiones más complejas.
