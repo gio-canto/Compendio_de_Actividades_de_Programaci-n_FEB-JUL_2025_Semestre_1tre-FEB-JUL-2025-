@@ -14,6 +14,7 @@ Este documento sirve como referencia rápida para estudiantes que están comenza
 | `#include <iomanip>` | Permite controlar formato de salida como `setprecision()` y `setw()` |
 | `#include <cmath>` | Habilita funciones matemáticas como `pow()`, `abs()`, `M_PI` |
 | `using namespace std;` | Permite omitir `std::` al usar `cout`, `cin`, etc. |
+| `#include <limits>'` | Sirve para usar los límites máximos y mínimos de tipos como int, float, etc.
 | `cout <<` | Muestra texto en pantalla |
 | `cin >>` | Captura datos del teclado |
 | `endl` | Salto de línea (igual que `\n` pero más formal en `cout`) |
