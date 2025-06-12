@@ -1,48 +1,55 @@
 // Actividad 68
 // Programa: Fabricadulces.cpp
-// Descripción: 
+// Descripción: Registro y análisis de sueldos de empleados en una fábrica de dulces
 // Autor: Gio Antonio Canto Gómez
+
 #include <iostream>
 #include <string>
-#include <iomanip> 
+#include <iomanip>
 using namespace std;
 
 int main() {
 
-    string nom; // Nombre del empleado
-    double suetemp = 0; // Sueldo del empleado
-    double Msue = 0;// Cantidad total de empleados a los que le paga mujrees menores de 20 años de antiguedad
-    double sue5 = 0; // Cantidad de dinero recaudado por los que ganan mayor a 5,000
-    int suet5 ; // Cantidad de presoans que ganan mas de 5,00
-    double suetprom = 0; // Promedio de perosnas dinero ganar mas de 5,000
-    char sex ; // Sexo del empelado
-    int ant ; // Antiguedad del empleado
-    int i ; // Varibale de control
+    string nom;            // Nombre del empleado
+    double suetemp = 0;    // Sueldo del empleado
+    double Msue = 0;       // Cantidad total de sueldo a mujeres con menos de 20 años de antigüedad
+    double sue5 = 0;       // Cantidad de dinero recaudado por empleados que ganan más de $5,000
+    int suet5 = 0;         // Cantidad de personas que ganan más de $5,000
+    double suetprom = 0;   // Promedio de sueldo de personas que ganan más de $5,000
+    char sex;              // Sexo del empleado
+    int ant;               // Antigüedad del empleado
+    int i;                 // Variable de control
+
+    const int TOTAL_EMPLEADOS = 300;
 
     cout << "===============================" << endl;
-    cout << "FABRICA DE DULCES JUAN SA DE CV" << endl; 
+    cout << "FABRICA DE DULCES JUAN SA DE CV" << endl;
     cout << "===============================" << endl;
-    cout << "Cantidad de empleados:   300" << endl;
+    cout << "Cantidad de empleados: " << TOTAL_EMPLEADOS << endl;
 
-    for ( i = 1; i <= 300; ++i) {
+    for (i = 1; i <= TOTAL_EMPLEADOS; ++i) {
         cout << "------------------------------------------" << endl;
-        cin.ignore () ;
-        cout << "\n=<<NUEVO REGISTRO>>" << endl;
+        cout << "\n=<< NUEVO REGISTRO >>=" << endl;
         cout << "= Empleado #" << i << endl;
-        cout << "Ingrese el Nombre del empleado: " ;
-        getline (cin, nom);
-        cout << "Indique el sexo del empleado (H = Hombre, M= Mujer X = Otros): " ;
-        cin >> sex;
-        cout << "Indique la antiguedad del empleado: " ;
-        cin >> ant;
-        cout << "Indique el sueldo mensual del empelado: " ;
-        cin >> suetemp ;
 
+        cin.ignore();
+        cout << "Ingrese el Nombre del empleado: ";
+        getline(cin, nom);
+
+        cout << "Indique el sexo del empleado (H = Hombre, M = Mujer, X = Otro): ";
+        cin >> sex;
+
+        cout << "Indique la antigüedad del empleado (en años): ";
+        cin >> ant;
+
+        cout << "Indique el sueldo mensual del empleado: $";
+        cin >> suetemp;
+        
         if ((sex == 'M' || sex == 'm') && ant < 20) {
             Msue += suetemp;
         }
 
-        // Sueldos mayores a $5000
+
         if (suetemp > 5000) {
             sue5 += suetemp;
             suet5++;
@@ -51,14 +58,25 @@ int main() {
         cout << "=<< Registro Exitoso >>=" << endl;
     }
 
-    cout << "\n===============================" << endl;
-    cout << "FABRICA DE DULCES JUAN SA DE CV" << endl; 
-    cout << "Reporte de datos" << endl; 
-    cout << "===============================" << endl;
-    cout << fixed ;
-    cout << "Cantidad de empleados:   300" << endl;
-    cout << "Cantidad de dinero pagado a empleadas con antiudaada menor a 20 años : $" << Msue << endl;
-    suetprom = (suet5 * 100 ) / sue5 ;
-    cout << "Cantidad de dinero pagado a empleados con sueldo mayor a $5,000: $" << suetprom << endl;
+    if (suet5 > 0) {
+        suetprom = sue5 / suet5;
+    }
 
+    cout << "\n===============================" << endl;
+    cout << "FABRICA DE DULCES JUAN SA DE CV" << endl;
+    cout << "Reporte de datos" << endl;
+    cout << "===============================" << endl;
+    cout << fixed << setprecision(2);
+    cout << "Cantidad de empleados: " << TOTAL_EMPLEADOS << endl;
+    cout << "Cantidad de dinero pagado a empleadas con antigüedad menor a 20 años: $"
+         << Msue << endl;
+
+    if (suet5 > 0) {
+        cout << "Promedio de sueldo de empleados con sueldo mayor a $5,000: $"
+             << suetprom << endl;
+    } else {
+        cout << "No hay empleados que ganen más de $5,000." << endl;
+    }
+
+    return 0;
 }
