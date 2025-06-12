@@ -10,11 +10,11 @@ using namespace std;
 int main() {
 
     string nom; // Nombre del empleado
-    double suetemp; // Sueldo del empleado
-    double Msue ;// Cantidad total de empleados a los que le paga mujrees menores de 20 años de antiguedad
-    double sue5 ; // Cantidad de dinero recaudado por los que ganan mayor a 5,000
+    double suetemp = 0; // Sueldo del empleado
+    double Msue = 0;// Cantidad total de empleados a los que le paga mujrees menores de 20 años de antiguedad
+    double sue5 = 0; // Cantidad de dinero recaudado por los que ganan mayor a 5,000
     int suet5 ; // Cantidad de presoans que ganan mas de 5,00
-    double suetprom ; // Promedio de perosnas dinero ganar mas de 5,000
+    double suetprom = 0; // Promedio de perosnas dinero ganar mas de 5,000
     char sex ; // Sexo del empelado
     int ant ; // Antiguedad del empleado
     int i ; // Varibale de control
@@ -38,15 +38,17 @@ int main() {
         cout << "Indique el sueldo mensual del empelado: " ;
         cin >> suetemp ;
 
-        if (sex == tolower('M') && ant < 20 ) {
-            Msue += suetemp ;
+        if ((sex == 'M' || sex == 'm') && ant < 20) {
+            Msue += suetemp;
         }
-        if (sex == tolower('M') && ant < 20 ) {
-            sue5 += suetemp ;
-            suet5 ++;
-        }
-        cout << "\n=<<Registo Existoso>>" << endl;
 
+        // Sueldos mayores a $5000
+        if (suetemp > 5000) {
+            sue5 += suetemp;
+            suet5++;
+        }
+
+        cout << "=<< Registro Exitoso >>=" << endl;
     }
 
     cout << "\n===============================" << endl;
