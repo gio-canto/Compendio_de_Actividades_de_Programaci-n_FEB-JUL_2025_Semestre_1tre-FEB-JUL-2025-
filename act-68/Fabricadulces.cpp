@@ -78,5 +78,6 @@ int main() {
         cout << "No hay empleados que ganen más de $5,000." << endl;
     }
 
+    system("pause");
     return 0;
 }
